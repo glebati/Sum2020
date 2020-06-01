@@ -3,5 +3,5 @@
 
 void main( void )
 {
-  MessageBox(NULL, "Test text\nText", "Info", MB_OK | MB_ICONINFORMATION);
+  MessageBox(NULL, "Test text\nText\nTest", "Info", MB_OK | MB_ICONINFORMATION);
 }

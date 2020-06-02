@@ -9,9 +9,10 @@
 
 /* Forward declaration */
 LRESULT CALLBACK WinFunc( HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam );
+void DrawEye( HDC hDC, INT X, INT Y, INT R, INT R1, INT Mx, INT My );
 
 /* The main program function */
-int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, CHAR *CmdLine, INT CmdShow )
+INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, CHAR *CmdLine, INT CmdShow )
 {
   HWND hWnd;
   MSG msg;
@@ -131,7 +132,7 @@ LRESULT CALLBACK WinFunc( HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam )
     GetCursorPos(&pt);
     ScreenToClient(hWnd, &pt);
     srand(30);
-    for (i = 0; i < 100; i++)
+    for (i = 0; i < 10; i++)
       DrawEye(hMemDC, rand() % w, rand() % h, 50 + rand() % 47, 18 + rand() % 8, pt.x, pt.y);
     return 0;
   case WM_PAINT:

@@ -11,8 +11,8 @@
 #define M (25 * 3)
 #define N (12 * 3)
 
-static VEC Geom[M][N];
-
+static VEC Geom[N][M];
+                                                       
 VOID GlobeSet( INT Xc, INT Yc, DBL R )
 {
   INT i, j;

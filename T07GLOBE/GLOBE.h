@@ -1,4 +1,8 @@
-
+/* FILE NAME: GLOBE.h
+ * PROGRAMMER: GC6
+ * DATE: 04.06.2020
+ * PURPOSE:
+ */
 
 /* Pi math constant */
 #define PI 3.14159265358979323846

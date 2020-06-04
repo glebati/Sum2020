@@ -1,12 +1,13 @@
 /* FILE NAME: T07GLOBE.c
  * PROGRAMMER: GC6
- * DATE: 03.06.2020
+ * DATE: 04.06.2020
  * PURPOSE:
  */
 
 #include <windows.h>
 
 #include "globe.h"
+#include "TIMER.H"
 
 /* Window class name */
 #define WND_CLASS_NAME "My Window Class Name"
@@ -48,8 +49,15 @@ INT WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, CHAR *CmdLine,
     NULL, NULL, hInstance, NULL);
 
   /* Message loop */
-  while (GetMessage(&msg, NULL, 0, 0))
-    DispatchMessage(&msg);
+  while (TRUE)
+    if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+    {
+      if (msg.message == WM_QUIT)
+        break;
+      DispatchMessage(&msg);
+    }
+    else
+      SendMessage(hWnd, WM_TIMER, 47, 0);
 
   return 30;
 } /* End of 'WinMain' function */
@@ -110,6 +118,7 @@ LRESULT CALLBACK WinFunc( HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam )
       GetSystemMetrics(SM_CYMAXTRACK) + GetSystemMetrics(SM_CYCAPTION) + 2 * GetSystemMetrics(SM_CYBORDER);
     return 0;
   case WM_CREATE:
+    GLB_TimerInit();
     SetTimer(hWnd, 30, 12, NULL);
     hDC = GetDC(hWnd);
     hMemDCFrame = CreateCompatibleDC(hDC);
@@ -127,7 +136,7 @@ LRESULT CALLBACK WinFunc( HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam )
     ReleaseDC(hWnd, hDC);
     SelectObject(hMemDCFrame, hBmFrame);
 
-    GlobeSet(w / 2, h / 2, (w < h ? w : h) * 0.8 / 2);
+    GlobeSet(w / 2, h / 2, (w < h ? w : h) * 0.4);
     SendMessage(hWnd, WM_TIMER, 0, 0);
 
     return 0;
@@ -147,6 +156,7 @@ LRESULT CALLBACK WinFunc( HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam )
     Rectangle(hMemDCFrame, 0, 0, w + 1, h + 1);
 
     GlobeDraw(hMemDCFrame);
+    GLB_TimerResponse();
 
     InvalidateRect(hWnd, NULL, FALSE);
     

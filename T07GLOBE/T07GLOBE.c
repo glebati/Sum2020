@@ -5,6 +5,7 @@
  */
 
 #include <windows.h>
+#include <stdio.h>
 
 #include "globe.h"
 #include "TIMER.H"
@@ -110,6 +111,7 @@ LRESULT CALLBACK WinFunc( HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam )
   static HDC hMemDCFrame;
   static HBITMAP hBmFrame;
   static INT w, h;
+  static CHAR Buf[100];
 
   switch (Msg)
   {
@@ -155,8 +157,10 @@ LRESULT CALLBACK WinFunc( HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam )
     SelectObject(hMemDCFrame, GetStockObject(NULL_PEN));
     Rectangle(hMemDCFrame, 0, 0, w + 1, h + 1);
 
-    GlobeDraw(hMemDCFrame);
     GLB_TimerResponse();
+    GlobeDraw(hMemDCFrame);
+
+    TextOut(hMemDCFrame, 0, 0, Buf, sprintf(Buf, "FPS: %f", GLB_FPS)); 
 
     InvalidateRect(hWnd, NULL, FALSE);
     

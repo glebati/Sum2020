@@ -7,6 +7,8 @@
 #include <windows.h>
 #include <math.h>
 #include <time.h>
+
+#include "timer.h"
 #include "globe.h"
 
 #define M (25 * 3)
@@ -70,7 +72,7 @@ VOID GlobeSet( INT Xc, INT Yc, DBL R )
 /* Globe Draw function */
 VOID GlobeDraw( HDC hDC )
 {
-  DBL t = (DBL)clock() / CLOCKS_PER_SEC, A, z[N][M];
+  DBL t = GLB_Time, A, z[N][M];
   INT i, j, s = 3; 
   static POINT pnts[N][M];  
 

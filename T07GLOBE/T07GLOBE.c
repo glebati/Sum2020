@@ -149,6 +149,8 @@ LRESULT CALLBACK WinFunc( HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam )
   case WM_KEYDOWN:
     if (wParam == VK_ESCAPE)
       SendMessage(hWnd, WM_CLOSE, 0, 0);
+    else if (wParam == 'P')
+      GLB_IsPause = !GLB_IsPause;
     return 0;
   case WM_TIMER:
     InvalidateRect(hWnd, NULL, FALSE);

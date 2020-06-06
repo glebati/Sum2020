@@ -5,11 +5,11 @@
  */
 
 #include <windows.h>
-#include <math.h>
 #include <time.h>
 
 #include "timer.h"
 #include "globe.h"
+#include "math.h"
 
 #define M (25 * 3)
 #define N (12 * 3)
@@ -75,13 +75,13 @@ VOID GlobeDraw( HDC hDC )
   DBL t = GLB_Time, A, z[N][M];
   INT i, j, s = 3; 
   static POINT pnts[N][M];  
+  MATR m = MatrRotateX(GLB_Time * 30);
 
   for (i = 0; i < N; i++)
     for (j = 0; j < M; j++)
     {
       VEC
-        v1 = VecRotateX(Geom[i][j], 30 * t),
-        v = VecRotateY(v1, 13 * t);
+        v = PointTransform(Geom[i][j], m);
                                          
       z[i][j] = v.Z;
       pnts[i][j].x = CenterX + (INT)v.X,

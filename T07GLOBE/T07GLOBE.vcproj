@@ -201,6 +201,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MATH.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TIMER.h"
 				>
 			</File>
